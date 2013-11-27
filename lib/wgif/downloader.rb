@@ -12,7 +12,13 @@ module WGif
 
     def self.get_video clip_url
       clip_data = HTTParty.get clip_url
-      WGif::Video.new clip_url, clip_data
+      temp = Tempfile.new "video"
+      begin
+        temp.write clip_data
+      ensure
+        temp.close
+      end
+      WGif::Video.new clip_url, temp.path
     end
 
   end
