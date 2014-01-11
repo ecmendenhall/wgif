@@ -10,5 +10,5 @@ describe WGif::GifMaker do
     frames = video.to_frames(frames: 5)
     described_class.make_gif(frames, "penguin.gif")
   end
-  
+
 end

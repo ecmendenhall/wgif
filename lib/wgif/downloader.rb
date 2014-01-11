@@ -18,7 +18,7 @@ module WGif
       ensure
         temp.close
       end
-      WGif::Video.new clip_url, temp.path
+      WGif::Video.new "wgif-vid", temp.path
     end
 
   end

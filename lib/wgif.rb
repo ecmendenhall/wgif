@@ -1,4 +1,5 @@
 require "wgif/version"
 require "wgif/downloader"
 require "wgif/video"
-require "wgif/gif_converter"
+require "wgif/gif_maker"
+require "wgif/cli"

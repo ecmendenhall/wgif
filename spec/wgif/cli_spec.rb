@@ -45,4 +45,20 @@ describe WGif::CLI do
     options[:trim_to].should eq("00:00:15")
   end
 
+  it 'handles args in wacky order' do
+    args = described_class.parse_args([
+      "-e",
+      "00:00:15",
+      "http://example.com",
+      "--frames",
+      "60",
+      "-s",
+      "00:00:05"])
+
+    args.should eq(url: "http://example.com",
+                   trim_from: "00:00:05",
+                   trim_to: "00:00:15",
+                   frames: 60)
+  end
+
 end

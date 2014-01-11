@@ -12,7 +12,7 @@ describe WGif::Downloader do
 
   it 'downloads a clip' do
     HTTParty.should_receive(:get).with('clip url').and_return('video data')
-    WGif::Video.should_receive(:new).with('clip url', 'video data')
+    WGif::Video.should_receive(:new).with('wgif-vid', /\/var\/folders\/.*/)
     video = described_class.get_video('clip url')
   end
 
