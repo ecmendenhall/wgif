@@ -24,35 +24,32 @@ describe WGif::Downloader do
     expect{ described_class.get_video(clip_url) }.to raise_error(WGif::VideoNotFoundException)
   end
 
-  it 'downloads a clip' do
-    ViddlRb.stub(:get_urls).and_return([clip_url])
-    fake_request = double('Typhoeus::Request')
-    fake_response = double('Typhoeus::Response')
-    Typhoeus::Request.should_receive(:new).with(clip_url).and_return(fake_request)
-    fake_request.should_receive(:on_headers)
-    fake_request.should_receive(:on_body)
-    fake_request.should_receive(:run).and_return(fake_response)
-    fake_response.should_receive(:response_code).and_return(200)
-    WGif::Video.should_receive(:new).with('roflcopter', "/tmp/wgif/roflcopter")
-    video = described_class.get_video(clip_url)
-  end
-
   it 'extracts a YouTube ID from a URL' do
     described_class.video_id("https://www.youtube.com/watch?v=tmNXKqeUtJM").should eq("tmNXKqeUtJM")
   end
 
-  it 'does not download the clip when already cached' do
-    ViddlRb.stub(:get_urls).and_return([clip_url])
-    fake_request = double('Typhoeus::Request')
-    fake_response = double('Typhoeus::Response')
-    Typhoeus::Request.should_receive(:new).once.with(clip_url).and_return(fake_request)
-    fake_request.should_receive(:on_headers)
-    fake_request.should_receive(:on_body)
-    fake_request.should_receive(:run).and_return(fake_response)
-    fake_response.should_receive(:response_code).and_return(200)
+  context 'downloading videos' do
 
-    described_class.get_video(clip_url)
-    described_class.get_video(clip_url)
+    before do
+      ViddlRb.stub(:get_urls).and_return([clip_url])
+      fake_request = double('Typhoeus::Request')
+      fake_response = double('Typhoeus::Response')
+      Typhoeus::Request.should_receive(:new).once.with(clip_url).and_return(fake_request)
+      fake_request.should_receive(:on_headers)
+      fake_request.should_receive(:on_body)
+      fake_request.should_receive(:run).and_return(fake_response)
+      fake_response.should_receive(:response_code).and_return(200)
+    end
+
+    it 'downloads a clip' do
+      WGif::Video.should_receive(:new).with('roflcopter', "/tmp/wgif/roflcopter")
+      video = described_class.get_video(clip_url)
+    end
+
+    it 'does not download the clip when already cached' do
+      described_class.get_video(clip_url)
+      described_class.get_video(clip_url)
+    end
   end
 
 end

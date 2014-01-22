@@ -38,9 +38,7 @@ module WGif
       WGif::Video.new(id, "/tmp/wgif/#{id}")
     end
 
-    def self.request_clip youtube_url, output_file
-      clip_url = self.video_url youtube_url
-      request = Typhoeus::Request.new clip_url
+    def self.create_progress_bar request
       size = nil
       progress_bar = ProgressBar.create(format: '%e %B %p%% %t',
                                         smoothing: 0.8,
@@ -55,7 +53,12 @@ module WGif
           output_file.write(chunk)
           progress_bar.progress += chunk.size
       end
+    end
 
+    def self.request_clip youtube_url, output_file
+      clip_url = self.video_url youtube_url
+      request = Typhoeus::Request.new clip_url
+      create_progress_bar(request)
       request.run
     end
 
@@ -65,7 +68,6 @@ module WGif
       begin
         clip = request_clip(youtube_url, temp)
         raise WGif::VideoNotFoundException unless clip.response_code == 200
-        clip
       ensure
         temp.close
       end

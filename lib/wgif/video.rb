@@ -3,11 +3,13 @@ require 'fileutils'
 
 module WGif
   class Video
-    attr_accessor :name, :clip
+    attr_accessor :name, :clip, :logger
 
     def initialize name, filepath
       @name = name
       @clip = FFMPEG::Movie.new(filepath)
+      @logger = Logger.new("/tmp/wgif/#{name}.log")
+      FFMPEG.logger = @logger
     end
 
     def trim start_timestamp, end_timestamp
