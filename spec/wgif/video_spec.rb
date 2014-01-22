@@ -1,5 +1,4 @@
 require 'rspec'
-require 'spec_helper'
 require 'wgif/video'
 
 describe WGif::Video do
