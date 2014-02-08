@@ -16,9 +16,9 @@ Example:
     $ wgif https://www.youtube.com/watch?v=1A78yTvIY1k bjork.gif -s 00:03:30 -d 2 -w 400
 ```
 
-## Installation
+## Installation (Mac OS X)
 WGif uses FFmpeg for video transcoding and ImageMagick to optimize GIFs.
-To install dependencies with Homebrew, just run:
+To install dependencies with [Homebrew](http://brew.sh/), just run
 
 ```sh
 $ brew bundle
@@ -33,7 +33,7 @@ $ gem build wgif.gemspec
 and
 
 ```sh
-$ gem install wgif-0.0.1.gem
+$ gem install wgif-0.0.1.pre.gem
 ```
 
 to install the executable.
@@ -75,3 +75,9 @@ And here it is:
 
 ![Bjork](http://i.imgur.com/NZXWwey.gif)
 ### "You shouldn't let poets lie to you."
+
+## Contributions
+Are welcome via pull request.
+
+## License
+This project is MIT licensed. See [LICENSE.txt](https://github.com/ecmendenhall/wgif/blob/master/LICENSE.txt) for details.
