@@ -1,4 +1,5 @@
 # WGif
+![Travis Build](https://travis-ci.org/ecmendenhall/wgif.png?branch=master)
 
 WGif is a command line tool for creating animated GIFs from YouTube videos.
 
