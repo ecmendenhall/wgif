@@ -1,2 +1,2 @@
-install imagemagick
 install ffmpeg
+install imagemagick

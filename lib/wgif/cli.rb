@@ -16,22 +16,22 @@ module WGif
       @parser = OptionParser.new do |opts|
         opts.on('-f N',
                 '--frames N',
-                'Number of frames in the final gif.') {
+                'Number of frames in the final gif. (Default 20)') {
                   |n|  @options[:frames] = n.to_i
                 }
         opts.on('-s HH:MM:SS',
                 '--start HH:MM:SS',
-                'Start creating gif from input video at this timestamp.') {
+                'Start creating gif from input video at this timestamp. (Default 00:00:00)') {
                   |ts| @options[:trim_from] = ts
                 }
         opts.on('-d seconds',
                 '--duration seconds',
-                'Number of seconds of input video to capture.') {
+                'Number of seconds of input video to capture. (Default 5)') {
                   |d|  @options[:duration] = d.to_f
                 }
         opts.on('-w pixels',
                 '--width pixels',
-                'Width of the gif in pixels.') {
+                'Width of the gif in pixels. (Default 500px)') {
                   |gs| @options[:dimensions] = gs
                 }
       end
