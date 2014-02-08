@@ -6,10 +6,10 @@ WGif is a command line tool for creating animated GIFs from YouTube videos.
 ```
 Usage: wgif [YouTube URL] [output file] [options]
 
-    -f, --frames N                   Number of frames in the final gif. (Default 20)
-    -s, --start HH:MM:SS             Start creating gif from input video at this timestamp. (Default 00:00:00)
-    -d, --duration seconds           Number of seconds of input video to capture. (Default 5)
-    -w, --width pixels               Width of the gif in pixels. (Default 500px)
+    -f, --frames N            Number of frames in the final gif. (Default 20)
+    -s, --start HH:MM:SS      Start creating gif from input video at this timestamp. (Default 00:00:00)
+    -d, --duration seconds    Number of seconds of input video to capture. (Default 5)
+    -w, --width pixels        Width of the gif in pixels. (Default 500px)
 
 Example:
 
@@ -45,7 +45,7 @@ WGif expects two arguments: a YouTube video URL and a name for the GIF it create
 $ wgif https://www.youtube.com/watch?v=1A78yTvIY1k bjork.gif
 ```
 
-Is enough to create a GIF of Bjork explaining her television. Without any extra parameters, WGif starts at
+Is enough to create a GIF of [Bjork explaining her television](https://www.youtube.com/watch?v=1A78yTvIY1k). Without any extra parameters, WGif starts at
 the beginning of the video, and creates a 20-frame, 500px GIF of the first five seconds. Since GIFs are more
 art than science, you'll probably want to tweak the size, duration, and number of frames.
 
