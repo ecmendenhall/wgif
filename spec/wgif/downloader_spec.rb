@@ -22,7 +22,7 @@ describe WGif::Downloader do
   end
 
   it 'throws an error if the video is not found' do
-    ViddlRb.should_receive(:get_urls).with(clip_url).and_return([])
+    ViddlRb.should_receive(:get_urls).with(clip_url).and_return(['http://lol.wut'])
     expect{ downloader.get_video(clip_url) }.to raise_error(WGif::VideoNotFoundException)
   end
 
