@@ -56,4 +56,17 @@ describe WGif::Downloader do
     end
   end
 
+  context 'errors' do
+
+    it 'throws an exception when the download URL is not found' do
+      ViddlRb.stub(:get_urls).and_raise(RuntimeError)
+      expect{ downloader.video_url('invalid url') }.to raise_error(WGif::VideoNotFoundException)
+    end
+
+    it 'throws an exception when the download URL is invalid' do
+      expect{ downloader.video_id(nil) }.to raise_error(WGif::InvalidUrlException)
+    end
+
+  end
+
 end

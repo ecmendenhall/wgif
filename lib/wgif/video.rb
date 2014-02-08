@@ -8,6 +8,7 @@ module WGif
     def initialize name, filepath
       @name = name
       @clip = FFMPEG::Movie.new(filepath)
+      FileUtils.mkdir_p "/tmp/wgif/"
       @logger = Logger.new("/tmp/wgif/#{name}.log")
       FFMPEG.logger = @logger
     end

@@ -6,6 +6,8 @@ require 'wgif/gif_maker'
 module WGif
   class CLI
 
+    attr_accessor :parser
+
     def initialize
       @options = {}
       @defaults = {

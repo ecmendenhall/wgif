@@ -18,4 +18,9 @@ describe WGif::GifMaker do
     gif_maker.make_gif([], 'bjork.gif', '500')
   end
 
+  it 'resizes the image' do
+    expect(image).to receive(:change_geometry).with('500')
+    gif_maker.resize([image], '500')
+  end
+
 end
