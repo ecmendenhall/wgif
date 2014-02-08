@@ -1,3 +1,3 @@
-module Wgif
-  VERSION = "0.0.3"
+module WGif
+  VERSION = "0.0.1"
 end
