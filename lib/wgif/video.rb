@@ -12,14 +12,13 @@ module WGif
       FFMPEG.logger = @logger
     end
 
-    def trim start_timestamp, end_timestamp
-      duration = time_offset start_timestamp, end_timestamp
+    def trim start_timestamp, duration
       options = {
         audio_codec: "copy",
         video_codec: "copy",
-        custom: "-ss #{start_timestamp} -t #{duration}"
+        custom: "-ss #{start_timestamp} -t 00:00:#{'%06.3f' % duration}"
       }
-      trimmed = @clip.transcode("/tmp/wgif/#{@name}-clip.mp4", options)
+      trimmed = transcode(@clip, "/tmp/wgif/#{@name}-clip.mp4", options)
       WGif::Video.new "#{@name}-clip", "/tmp/wgif/#{@name}-clip.mp4"
     end
 
@@ -30,11 +29,7 @@ module WGif
       else
         framerate = 24
       end
-      begin
-        @clip.transcode("/tmp/wgif/frames/\%2d.png", "-vf fps=#{framerate}")
-      rescue FFMPEG::Error => error
-        raise error unless error.message.include? "no output file created"
-      end
+      transcode(@clip, "/tmp/wgif/frames/\%2d.png", "-vf fps=#{framerate}")
       open_frame_dir
     end
 
@@ -49,21 +44,13 @@ module WGif
       Dir.glob("/tmp/wgif/frames/*.png")
     end
 
-    def time_offset start_timestamp, end_timestamp
-      start_values = time_values(start_timestamp)
-      end_values   = time_values(end_timestamp)
-      offset = end_values.zip(start_values).map do |end_val, start_val|
-        end_val - start_val
+    def transcode(clip, file, options)
+      begin
+        clip.transcode(file, options)
+      rescue FFMPEG::Error => error
+        raise WGif::ClipEncodingException unless error.message.include? "no output file created"
+        raise WGif::ClipEncodingException if error.message.include? "Invalid data found when processing input"
       end
-      values_to_stamp offset
-    end
-
-    def time_values timestamp
-      timestamp.split(':').map(&:to_i)
-    end
-
-    def values_to_stamp values
-      values.map {|v| format "%02d", v }.join(':')
     end
 
   end
