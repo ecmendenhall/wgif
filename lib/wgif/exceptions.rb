@@ -3,6 +3,15 @@ module WGif
   class InvalidUrlException < Exception
   end
 
+  class InvalidTimestampException < Exception
+  end
+
+  class InvalidDurationException < Exception
+  end
+
+  class InvalidFramesException < Exception
+  end
+
   class MissingOutputFileException < Exception
   end
 

@@ -1,6 +1,7 @@
 require 'viddl-rb'
 require 'typhoeus'
 require 'wgif/download_bar'
+require 'wgif/exceptions'
 require 'wgif/video'
 require 'wgif/video_cache'
 require 'uri'
@@ -23,9 +24,13 @@ module WGif
     end
 
     def video_id youtube_url
-      uri = URI(youtube_url)
-      params = CGI.parse(uri.query)
-      params['v'].first
+      begin
+        uri = URI(youtube_url)
+        params = CGI.parse(uri.query)
+        params['v'].first
+      rescue
+        raise WGif::InvalidUrlException
+      end
     end
 
     def get_video youtube_url

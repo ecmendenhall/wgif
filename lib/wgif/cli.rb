@@ -34,6 +34,13 @@ module WGif
                 'Width of the gif in pixels. (Default 500px)') {
                   |gs| @options[:dimensions] = gs
                 }
+
+        opts.on_tail('-h',
+                     '--help',
+                     'Print help information.') {
+                       print_help
+                       exit 0
+                     }
       end
     end
 
@@ -48,13 +55,14 @@ module WGif
     end
 
     def validate_args(parsed_args)
-      raise WGif::InvalidUrlException unless parsed_args[:url] =~ /https?\:\/\/.*/
+      raise WGif::InvalidUrlException unless parsed_args[:url] =~ /\Ahttps?\:\/\/.*\z/
+      raise WGif::InvalidTimestampException unless parsed_args[:trim_from] =~ /\A\d{1,2}(?::\d{2})+(?:\.\d*)?\z/
       raise WGif::MissingOutputFileException unless parsed_args[:output]
     end
 
     def make_gif(cli_args)
-      args = parse_args cli_args
       rescue_errors do
+        args = parse_args cli_args
         validate_args(args)
         video = Downloader.new.get_video(args[:url])
         clip = video.trim(args[:trim_from], args[:duration])
@@ -70,12 +78,27 @@ module WGif
         yield
       rescue WGif::InvalidUrlException
         print_error "That looks like an invalid URL. Check the syntax."
+      rescue WGif::InvalidTimestampException
+        print_error "That looks like an invalid timestamp. Check the syntax."
       rescue WGif::MissingOutputFileException
         print_error 'Please specify an output file.'
       rescue WGif::VideoNotFoundException
         print_error "WGif can't find a valid YouTube video at that URL."
       rescue WGif::ClipEncodingException
         print_error "WGif encountered an error transcoding the video."
+      rescue SystemExit => e
+        raise e
+      rescue Exception => e
+        print_error <<-error
+Something went wrong creating your GIF. The details:
+
+#{e}
+#{e.backtrace.join("\n")}
+
+Please open an issue at: https://github.com/ecmendenhall/wgif/issues/new
+error
+      ensure
+        exit 1
       end
     end
 

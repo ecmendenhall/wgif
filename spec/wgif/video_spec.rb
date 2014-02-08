@@ -1,4 +1,4 @@
-require 'rspec'
+require 'spec_helper'
 require 'wgif/video'
 
 describe WGif::Video do
@@ -53,5 +53,24 @@ describe WGif::Video do
     expect(Dir).to receive(:glob).with('/tmp/wgif/frames/*.png').twice
     video = described_class.new "bjork", "/tmp/wgif/bjork.mp4"
     frames = video.to_frames(frames: 10)
+  end
+
+  it 'catches transcode errors and raises an exception' do
+    expect(clip).to receive(:transcode).and_raise(FFMPEG::Error)
+    video = described_class.new "bjork", "/tmp/wgif/bjork.mp4"
+    expect{ video.trim("00:00:00", 5.0) }.to raise_error(WGif::ClipEncodingException)
+  end
+
+  it 'silences transcode errors from ripping frames' do
+    expect(clip).to receive(:transcode).and_raise(FFMPEG::Error.new "no output file created")
+    video = described_class.new "bjork", "/tmp/wgif/bjork.mp4"
+    expect{ video.trim("00:00:00", 5.0) }.not_to raise_error
+  end
+
+  it 'silences transcode errors from ripping frames when input is invalid' do
+    message = "no output file created. Invalid data found when processing input"
+    expect(clip).to receive(:transcode).and_raise(FFMPEG::Error.new message)
+    video = described_class.new "bjork", "/tmp/wgif/bjork.mp4"
+    expect{ video.trim("00:00:00", 5.0) }.to raise_error(WGif::ClipEncodingException)
   end
 end

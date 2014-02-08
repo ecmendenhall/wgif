@@ -1,4 +1,4 @@
-require 'rspec'
+require 'spec_helper'
 require 'wgif/downloader'
 require 'wgif/video'
 
