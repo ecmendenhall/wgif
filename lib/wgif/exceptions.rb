@@ -9,4 +9,7 @@ module WGif
   class VideoNotFoundException < Exception
   end
 
+  class ClipEncodingException < Exception
+  end
+
 end

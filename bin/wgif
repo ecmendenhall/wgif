@@ -1,4 +1,4 @@
 #!/usr/bin/env/ruby
 
 require 'wgif/cli'
-WGif::CLI.make_gif ARGV
+WGif::CLI.new.make_gif ARGV
