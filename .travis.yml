@@ -1,4 +1,7 @@
 language: ruby
+install:
+  - apt-get install ffmpeg
+  - apt-get install imagemagick
 command: bundle exec rake
 rvm:
   - 2.1.0
