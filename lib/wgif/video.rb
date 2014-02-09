@@ -19,8 +19,8 @@ module WGif
         video_codec: "copy",
         custom: "-ss #{start_timestamp} -t 00:00:#{'%06.3f' % duration}"
       }
-      trimmed = transcode(@clip, "/tmp/wgif/#{@name}-clip.mp4", options)
-      WGif::Video.new "#{@name}-clip", "/tmp/wgif/#{@name}-clip.mp4"
+      trimmed = transcode(@clip, "/tmp/wgif/#{@name}-clip.mov", options)
+      WGif::Video.new "#{@name}-clip", "/tmp/wgif/#{@name}-clip.mov"
     end
 
     def to_frames(options={})
