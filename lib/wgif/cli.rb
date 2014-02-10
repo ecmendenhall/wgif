@@ -41,7 +41,7 @@ module WGif
                      '--help',
                      'Print help information.') {
                        print_help
-                       exit 0
+                       exit
                      }
       end
     end
@@ -99,14 +99,13 @@ Something went wrong creating your GIF. The details:
 
 Please open an issue at: https://github.com/ecmendenhall/wgif/issues/new
 error
-      ensure
-        exit 1
       end
     end
 
     def print_error(message)
       puts message, "\n"
       print_help
+      exit 1
     end
 
     def print_help
