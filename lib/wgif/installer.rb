@@ -8,11 +8,10 @@ module WGif
         DEPENDENCIES.each do |dependency, binary|
           install(dependency, binary)
         end
-        puts "All dependencies sucessfully installed."
       else
         puts "WGif can't find Homebrew. Visit http://brew.sh/ to get it."
+        Kernel.exit 0
       end
-      Kernel.exit 0
     end
 
     def homebrew_installed?
