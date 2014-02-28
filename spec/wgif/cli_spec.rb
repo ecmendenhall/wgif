@@ -14,9 +14,9 @@ describe WGif::CLI do
     args[:trim_from].should eq("00:00:00")
   end
 
-  it 'trims clips to 5s by default' do
+  it 'trims clips to 1s by default' do
     args = cli.parse_args ["http://example.com"]
-    args[:duration].should eq(5)
+    args[:duration].should eq(1)
   end
 
   it 'parses the short frame count option' do
@@ -75,7 +75,7 @@ describe WGif::CLI do
                        duration: 1.5,
                        frames: 60,
                        output: "my-great-gif.gif",
-                       dimensions: "500")
+                       dimensions: "480")
   end
 
   context 'validating args' do

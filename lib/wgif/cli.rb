@@ -12,8 +12,8 @@ module WGif
       @options = {}
       @defaults = {
         trim_from: '00:00:00',
-        duration: 5.0,
-        dimensions: '500'
+        duration: 1.0,
+        dimensions: '480'
       }
       @parser = OptionParser.new do |opts|
         opts.on('-f N',
