@@ -18,14 +18,13 @@ Example:
 ```
 
 ## Installation (Mac OS X)
-WGif uses FFmpeg for video transcoding and ImageMagick to optimize GIFs.
-To install dependencies with [Homebrew](http://brew.sh/), just run
+To install from Rubygems:
 
 ```sh
-$ brew bundle
+$ gem install wgif
 ```
 
-in the project directory. Then
+To install from source, run
 
 ```sh
 $ gem build wgif.gemspec
@@ -38,6 +37,13 @@ $ gem install wgif-0.0.1.pre.gem
 ```
 
 to install the executable.
+
+WGif uses FFmpeg for video transcoding and ImageMagick to optimize GIFs.
+To install dependencies with [Homebrew](http://brew.sh/), just run
+
+```sh
+$ wgif install
+```
 
 ## Making a GIF
 WGif expects two arguments: a YouTube video URL and a name for the GIF it creates. So,
