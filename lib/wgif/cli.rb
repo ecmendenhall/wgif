@@ -2,6 +2,7 @@ require 'optparse'
 require 'wgif/exceptions'
 require 'wgif/downloader'
 require 'wgif/gif_maker'
+require 'wgif/installer'
 
 module WGif
   class CLI
@@ -63,6 +64,7 @@ module WGif
     end
 
     def make_gif(cli_args)
+      WGif::Installer.new.run if cli_args[0] == 'install'
       rescue_errors do
         args = parse_args cli_args
         validate_args(args)
