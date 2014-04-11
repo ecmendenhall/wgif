@@ -21,4 +21,7 @@ module WGif
   class ClipEncodingException < Exception
   end
 
+  class ImgurException < Exception
+  end
+
 end

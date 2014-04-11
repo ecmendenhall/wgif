@@ -35,6 +35,11 @@ module WGif
                 'Width of the gif in pixels. (Default 500px)') {
                   |gs| @options[:dimensions] = gs
                 }
+        opts.on('-u',
+                '--upload',
+                'Upload finished GIF to Imgur') {
+                  |u| @options[:upload] = !!u
+                }
 
         opts.on_tail('-h',
                      '--help',
@@ -65,6 +70,7 @@ module WGif
       WGif::Installer.new.run if cli_args[0] == 'install'
       require 'wgif/downloader'
       require 'wgif/gif_maker'
+      require 'wgif/uploader'
       rescue_errors do
         args = parse_args cli_args
         validate_args(args)
@@ -72,6 +78,10 @@ module WGif
         clip = video.trim(args[:trim_from], args[:duration])
         frames = clip.to_frames(frames: args[:frames])
         GifMaker.new.make_gif(frames, args[:output], args[:dimensions])
+        if args[:upload]
+          url = Uploader.new('d2321b02db7ba15').upload(args[:output])
+          puts "Finished. GIF uploaded to Imgur at #{url}"
+        end
       end
     end
 
@@ -90,6 +100,12 @@ module WGif
         print_error "WGif can't find a valid YouTube video at that URL."
       rescue WGif::ClipEncodingException
         print_error "WGif encountered an error transcoding the video."
+      rescue WGif::ImgurException => e
+        print_error <<-error
+WGif couldn't upload your GIF to Imgur. The Imgur error was:
+
+#{e}
+error
       rescue SystemExit => e
         raise e
       rescue Exception => e

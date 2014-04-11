@@ -59,6 +59,16 @@ describe WGif::CLI do
     expect(options[:dimensions]).to eq("300")
   end
 
+  it 'parses the short upload option' do
+    options = cli.parse_options ["-u"]
+    expect(options[:upload]).to eq(true)
+  end
+
+  it 'parses the long upload option' do
+    options = cli.parse_options ["--upload"]
+    expect(options[:upload]).to eq(true)
+  end
+
   it 'handles args in wacky order' do
     args = cli.parse_args([
       "-d",
@@ -162,6 +172,12 @@ describe WGif::CLI do
       OptionParser.any_instance.stub(:parse!).and_raise(WGif::ClipEncodingException)
       expect{ cli.make_gif([]) }.to raise_error(SystemExit)
       expect_help_with_message(@mock_stdout.string, "WGif encountered an error transcoding the video.")
+    end
+
+    it 'catches upload errors' do
+      OptionParser.any_instance.stub(:parse!).and_raise(WGif::ImgurException, "Imgur error")
+      expect{ cli.make_gif([]) }.to raise_error(SystemExit)
+      expect_help_with_message(@mock_stdout.string, "Imgur error")
     end
 
     it 'raises SystemExit when thrown' do

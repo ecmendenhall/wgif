@@ -13,9 +13,8 @@ Gem::Specification.new do |spec|
   spec.homepage      = "https://github.com/ecmendenhall/wgif"
   spec.license       = "MIT"
 
-  spec.files         = `git ls-files`.split($/)
+  spec.files         = `git ls-files`.split($/) << 'lib/wgif/uploader.rb'
   spec.executables   = ["wgif"]
-    #spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
