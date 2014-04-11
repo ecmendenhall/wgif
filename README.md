@@ -94,6 +94,9 @@ And here it is:
 ## Changes
 - v0.2.0, 2014/4/11: Add automatic upload to Imgur with `--upload` flag.
 
+## Contributors
+Thanks to [arlandism](https://github.com/arlandism) and [ellie007](https://github.com/ellie007) for pairing on Imgur uploads.
+
 ## Contributions
 Are welcome via pull request.
 
