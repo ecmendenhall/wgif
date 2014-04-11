@@ -1,5 +1,5 @@
 # WGif
-![Travis Build](https://travis-ci.org/ecmendenhall/wgif.png?branch=master)
+[![Build Status](https://travis-ci.org/ecmendenhall/wgif.svg?branch=master)](https://travis-ci.org/ecmendenhall/wgif)
 
 WGif is a command line tool for creating animated GIFs from YouTube videos.
 
@@ -10,11 +10,12 @@ Usage: wgif [YouTube URL] [output file] [options]
     -f, --frames N            Number of frames in the final gif. (Default 20)
     -s, --start HH:MM:SS      Start creating gif from input video at this timestamp. (Default 00:00:00)
     -d, --duration seconds    Number of seconds of input video to capture. (Default 1)
+    -u, --upload              Upload finished GIF to Imgur
     -w, --width pixels        Width of the gif in pixels. (Default 480px)
 
 Example:
 
-    $ wgif https://www.youtube.com/watch?v=1A78yTvIY1k bjork.gif -s 00:03:30 -d 2 -w 400
+    $ wgif https://www.youtube.com/watch?v=1A78yTvIY1k bjork.gif -s 00:03:30 -d 2 -w 400 --upload
 ```
 
 ## Installation (Mac OS X)
@@ -33,7 +34,7 @@ $ gem build wgif.gemspec
 and
 
 ```sh
-$ gem install wgif-0.0.1.pre.gem
+$ gem install wgif-0.2.0.gem
 ```
 
 to install the executable.
@@ -78,10 +79,20 @@ with the `-w` or `--width` flag:
 $ wgif https://www.youtube.com/watch?v=1A78yTvIY1k bjork.gif --start 00:03:30 -d 2 -f 18 --width 350
 ```
 
+And finally, now that everything's completed add the `--upload` flag to automatically post it to Imgur:
+
+```sh
+$ wgif https://www.youtube.com/watch?v=1A78yTvIY1k bjork.gif --start 00:03:30 -d 2 -f 18 --width 350 --upload
+Finished. GIF uploaded to Imgur at http://i.imgur.com/iA28DuR.gif
+```
+
 And here it is:
 
-![Bjork](http://i.imgur.com/NZXWwey.gif)
+![Bjork](http://i.imgur.com/iA28DUR.gif)
 ### "You shouldn't let poets lie to you."
+
+## Changes
+- v0.2.0, 2014/4/11: Add automatic upload to Imgur with `--upload` flag.
 
 ## Contributions
 Are welcome via pull request.
