@@ -79,7 +79,7 @@ with the `-w` or `--width` flag:
 $ wgif https://www.youtube.com/watch?v=1A78yTvIY1k bjork.gif --start 00:03:30 -d 2 -f 18 --width 350
 ```
 
-And finally, now that everything's completed add the `--upload` flag to automatically post it to Imgur:
+And finally, now that everything's completed, let's add the `--upload` flag to automatically post it to Imgur:
 
 ```sh
 $ wgif https://www.youtube.com/watch?v=1A78yTvIY1k bjork.gif --start 00:03:30 -d 2 -f 18 --width 350 --upload
