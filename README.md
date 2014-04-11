@@ -88,7 +88,7 @@ Finished. GIF uploaded to Imgur at http://i.imgur.com/iA28DuR.gif
 
 And here it is:
 
-![Bjork](http://i.imgur.com/iA28DUR.gif)
+![Bjork](http://i.imgur.com/iA28DuR.gif)
 ### "You shouldn't let poets lie to you."
 
 ## Changes
