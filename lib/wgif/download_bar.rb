@@ -23,6 +23,5 @@ module WGif
     def increment_progress(size)
       @progress_bar.progress += size
     end
-
   end
 end

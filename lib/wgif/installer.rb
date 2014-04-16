@@ -6,7 +6,7 @@ module WGif
 
     def run
       if dependencies_installed?
-        puts "All dependencies are installed. Go make a GIF."
+        puts 'All dependencies are installed. Go make a GIF.'
         Kernel.exit 0
       end
       if homebrew_installed?
@@ -21,7 +21,7 @@ module WGif
     end
 
     def dependencies_installed?
-      DEPENDENCIES.map {|_, binary| installed?(binary)}.inject(:&)
+      DEPENDENCIES.map { |_, binary| installed?(binary) }.inject(:&)
     end
 
     def homebrew_installed?
@@ -39,6 +39,5 @@ module WGif
     def installed?(binary)
       Kernel.system "which #{binary} > /dev/null"
     end
-
   end
 end

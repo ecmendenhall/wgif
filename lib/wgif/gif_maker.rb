@@ -12,7 +12,9 @@ module WGif
 
     def resize(image, dimensions)
       image.each do |frame|
-        frame.change_geometry(dimensions) { |cols, rows, img| img.resize!(cols, rows) }
+        frame.change_geometry(dimensions) do |cols, rows, img|
+          img.resize!(cols, rows)
+        end
       end
     end
   end

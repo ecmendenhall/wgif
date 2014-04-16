@@ -38,7 +38,7 @@ module WGif
         opts.on('-u',
                 '--upload',
                 'Upload finished GIF to Imgur') {
-                  |u| @options[:upload] = !!u
+                  |u| @options[:upload] = u
                 }
 
         opts.on_tail('-h',
@@ -88,27 +88,24 @@ module WGif
     private
 
     def rescue_errors
-      begin
-        yield
+      yield
       rescue WGif::InvalidUrlException
-        print_error "That looks like an invalid URL. Check the syntax."
+        print_error 'That looks like an invalid URL. Check the syntax.'
       rescue WGif::InvalidTimestampException
-        print_error "That looks like an invalid timestamp. Check the syntax."
+        print_error 'That looks like an invalid timestamp. Check the syntax.'
       rescue WGif::MissingOutputFileException
         print_error 'Please specify an output file.'
       rescue WGif::VideoNotFoundException
         print_error "WGif can't find a valid YouTube video at that URL."
       rescue WGif::ClipEncodingException
-        print_error "WGif encountered an error transcoding the video."
+        print_error 'WGif encountered an error transcoding the video.'
       rescue WGif::ImgurException => e
         print_error <<-error
 WGif couldn't upload your GIF to Imgur. The Imgur error was:
 
 #{e}
 error
-      rescue SystemExit => e
-        raise e
-      rescue Exception => e
+      rescue StandardError => e
         print_error <<-error
 Something went wrong creating your GIF. The details:
 
@@ -117,7 +114,6 @@ Something went wrong creating your GIF. The details:
 
 Please open an issue at: https://github.com/ecmendenhall/wgif/issues/new
 error
-      end
     end
 
     def print_error(message)
@@ -127,7 +123,7 @@ error
     end
 
     def print_help
-      puts "Usage: wgif [YouTube URL] [output file] [options]", "\n"
+      puts 'Usage: wgif [YouTube URL] [output file] [options]', "\n"
       puts @parser.summarize, "\n"
       puts <<-example
 Example:
@@ -136,6 +132,5 @@ Example:
 
       example
     end
-
   end
 end

@@ -88,7 +88,7 @@ describe WGif::Installer do
       expect(Kernel).to receive(:system).with('which convert > /dev/null').twice.
         and_return(false)
       expect(Kernel).to receive(:system).with('brew install imagemagick')
-      expect{ installer.run }.to raise_error(SystemExit)
+      expect { installer.run }.to raise_error(SystemExit)
     end
 
     it 'prints a helpful error if homebrew is not found' do
@@ -98,7 +98,7 @@ describe WGif::Installer do
         and_return(false)
       expect(Kernel).to receive(:system).with('brew info > /dev/null').
         and_return(false)
-      expect{ installer.run }.to raise_error(SystemExit)
+      expect { installer.run }.to raise_error(SystemExit)
       expect(@mock_stdout.string).to eq("WGif can't find Homebrew. Visit http://brew.sh/ to get it.\n")
     end
   end

@@ -14,10 +14,13 @@ module WGif
     def upload(filename)
       File.open(filename, 'r') do |file|
         response = Typhoeus.post(UPLOAD_ENDPOINT,
-                                 body: {image: file},
+                                 body: { image: file },
                                  headers: auth_header)
-        raise WGif::ImgurException, error_message(response) unless response.success?
-        image_url(response)
+        if response.success?
+          image_url(response)
+        else
+          raise WGif::ImgurException, error_message(response)
+        end
       end
     end
 
@@ -32,7 +35,7 @@ module WGif
     end
 
     def auth_header
-      {Authorization: "Client-ID #{@client_id}"}
+      { Authorization: "Client-ID #{@client_id}" }
     end
   end
 end
