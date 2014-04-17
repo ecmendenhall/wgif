@@ -40,7 +40,6 @@ module WGif
                 'Upload finished GIF to Imgur') {
                   |u| @options[:upload] = u
                 }
-
         opts.on_tail('-h',
                      '--help',
                      'Print help information.') {
