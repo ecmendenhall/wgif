@@ -19,7 +19,7 @@ module WGif
         if response.success?
           image_url(response)
         else
-          raise WGif::ImgurException, error_message(response)
+          fail WGif::ImgurException, error_message(response)
         end
       end
     end

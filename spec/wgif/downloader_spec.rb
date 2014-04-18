@@ -22,12 +22,14 @@ describe WGif::Downloader do
   end
 
   it 'throws an error if the video is not found' do
-    ViddlRb.should_receive(:get_urls).with(clip_url).and_return(['http://lol.wut'])
-    expect { downloader.get_video(clip_url) }.to raise_error(WGif::VideoNotFoundException)
+    ViddlRb.should_receive(:get_urls).with(clip_url)
+      .and_return(['http://lol.wut'])
+    expect { downloader.get_video(clip_url) }
+      .to raise_error(WGif::VideoNotFoundException)
   end
 
   it 'extracts a YouTube ID from a URL' do
-    downloader.video_id('https://www.youtube.com/watch?v=tmNXKqeUtJM').should eq('tmNXKqeUtJM')
+    downloader.video_id('http://lol.wut?v=id').should eq('id')
   end
 
   context 'downloading videos' do
@@ -36,7 +38,8 @@ describe WGif::Downloader do
       ViddlRb.stub(:get_urls).and_return([clip_url])
       fake_request = double('Typhoeus::Request')
       fake_response = double('Typhoeus::Response')
-      Typhoeus::Request.should_receive(:new).once.with(clip_url).and_return(fake_request)
+      Typhoeus::Request.should_receive(:new).once
+        .with(clip_url).and_return(fake_request)
       fake_request.should_receive(:on_headers)
       fake_request.should_receive(:on_body)
       fake_request.should_receive(:run).and_return(fake_response)
@@ -45,8 +48,8 @@ describe WGif::Downloader do
 
     it 'downloads a clip' do
       video = double(name: 'video')
-      WGif::Video.should_receive(:new).with('roflcopter', '/tmp/wgif/roflcopter').
-        and_return(video)
+      WGif::Video.should_receive(:new)
+        .with('roflcopter', '/tmp/wgif/roflcopter').and_return(video)
       downloader.get_video(clip_url)
     end
 
@@ -60,11 +63,13 @@ describe WGif::Downloader do
 
     it 'throws an exception when the download URL is not found' do
       ViddlRb.stub(:get_urls).and_raise(RuntimeError)
-      expect { downloader.video_url('invalid url') }.to raise_error(WGif::VideoNotFoundException)
+      expect { downloader.video_url('invalid url') }
+        .to raise_error(WGif::VideoNotFoundException)
     end
 
     it 'throws an exception when the download URL is invalid' do
-      expect { downloader.video_id(nil) }.to raise_error(WGif::InvalidUrlException)
+      expect { downloader.video_id(nil) }
+        .to raise_error(WGif::InvalidUrlException)
     end
 
   end

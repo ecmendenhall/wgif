@@ -48,8 +48,8 @@ module WGif
     def transcode(clip, file, options)
       clip.transcode(file, options)
     rescue FFMPEG::Error => error
-      raise WGif::ClipEncodingException unless error.message.include? 'no output file created'
-      raise WGif::ClipEncodingException if error.message.include? 'Invalid data found when processing input'
+      fail WGif::ClipEncodingException unless error.message.include? 'no output file created'
+      fail WGif::ClipEncodingException if error.message.include? 'Invalid data found when processing input'
     end
   end
 end

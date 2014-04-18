@@ -13,23 +13,33 @@ module WGif
 
     def make_gif(cli_args)
       WGif::Installer.new.run if cli_args[0] == 'install'
-      require 'wgif/downloader'
-      require 'wgif/gif_maker'
-      require 'wgif/uploader'
+      load_dependencies
       rescue_errors do
         args = @argument_parser.parse(cli_args)
-        video = Downloader.new.get_video(args[:url])
-        clip = video.trim(args[:trim_from], args[:duration])
-        frames = clip.to_frames(frames: args[:frames])
+        frames = convert_video(args)
         GifMaker.new.make_gif(frames, args[:output], args[:dimensions])
-        if args[:upload]
-          url = Uploader.new('d2321b02db7ba15').upload(args[:output])
-          puts "Finished. GIF uploaded to Imgur at #{url}"
-        end
+        upload(args) if args[:upload]
       end
     end
 
     private
+
+    def upload(args)
+      url = Uploader.new('d2321b02db7ba15').upload(args[:output])
+      puts "Finished. GIF uploaded to Imgur at #{url}"
+    end
+
+    def convert_video(args)
+      video = Downloader.new.get_video(args[:url])
+      clip = video.trim(args[:trim_from], args[:duration])
+      clip.to_frames(frames: args[:frames])
+    end
+
+    def load_dependencies
+      require 'wgif/downloader'
+      require 'wgif/gif_maker'
+      require 'wgif/uploader'
+    end
 
     def rescue_errors
       yield

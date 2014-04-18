@@ -70,7 +70,7 @@ module WGif
       temp = File.open("/tmp/wgif/#{id}", 'wb')
       begin
         clip = request_clip(youtube_url, temp)
-        raise WGif::VideoNotFoundException unless clip.response_code == 200
+        fail WGif::VideoNotFoundException unless clip.response_code == 200
       ensure
         temp.close
       end
