@@ -9,10 +9,7 @@ module WGif
 
     def get(video_id)
       path = "/tmp/wgif/#{video_id}"
-      if Pathname.new(path).exist?
-        WGif::Video.new(video_id, path)
-      end
+      WGif::Video.new(video_id, path) if Pathname.new(path).exist?
     end
-
   end
 end

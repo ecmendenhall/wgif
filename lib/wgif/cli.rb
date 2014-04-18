@@ -1,114 +1,65 @@
-require 'optparse'
+require 'wgif/argument_parser'
 require 'wgif/exceptions'
 require 'wgif/installer'
 
 module WGif
   class CLI
 
-    attr_accessor :parser
+    attr_accessor :argument_parser
 
     def initialize
-      @options = {}
-      @defaults = {
-        trim_from: '00:00:00',
-        duration: 1.0,
-        dimensions: '480'
-      }
-      @parser = OptionParser.new do |opts|
-        opts.on('-f N',
-                '--frames N',
-                'Number of frames in the final gif. (Default 20)') {
-                  |n|  @options[:frames] = n.to_i
-                }
-        opts.on('-s HH:MM:SS',
-                '--start HH:MM:SS',
-                'Start creating gif from input video at this timestamp. (Default 00:00:00)') {
-                  |ts| @options[:trim_from] = ts
-                }
-        opts.on('-d seconds',
-                '--duration seconds',
-                'Number of seconds of input video to capture. (Default 5)') {
-                  |d|  @options[:duration] = d.to_f
-                }
-        opts.on('-w pixels',
-                '--width pixels',
-                'Width of the gif in pixels. (Default 500px)') {
-                  |gs| @options[:dimensions] = gs
-                }
-        opts.on('-u',
-                '--upload',
-                'Upload finished GIF to Imgur') {
-                  |u| @options[:upload] = !!u
-                }
-
-        opts.on_tail('-h',
-                     '--help',
-                     'Print help information.') {
-                       print_help
-                       exit
-                     }
-      end
-    end
-
-    def parse_args(args)
-      options = @defaults.merge(parse_options args)
-      options.merge(url: args[0], output: args[1])
-    end
-
-    def parse_options(args)
-      @parser.parse! args
-      @options
-    end
-
-    def validate_args(parsed_args)
-      raise WGif::InvalidUrlException unless parsed_args[:url] =~ /\Ahttps?\:\/\/.*\z/
-      raise WGif::InvalidTimestampException unless parsed_args[:trim_from] =~ /\A\d{1,2}(?::\d{2})+(?:\.\d*)?\z/
-      raise WGif::MissingOutputFileException unless parsed_args[:output]
+      @argument_parser = WGif::ArgumentParser.new
     end
 
     def make_gif(cli_args)
       WGif::Installer.new.run if cli_args[0] == 'install'
-      require 'wgif/downloader'
-      require 'wgif/gif_maker'
-      require 'wgif/uploader'
+      load_dependencies
       rescue_errors do
-        args = parse_args cli_args
-        validate_args(args)
-        video = Downloader.new.get_video(args[:url])
-        clip = video.trim(args[:trim_from], args[:duration])
-        frames = clip.to_frames(frames: args[:frames])
+        args = @argument_parser.parse(cli_args)
+        frames = convert_video(args)
         GifMaker.new.make_gif(frames, args[:output], args[:dimensions])
-        if args[:upload]
-          url = Uploader.new('d2321b02db7ba15').upload(args[:output])
-          puts "Finished. GIF uploaded to Imgur at #{url}"
-        end
+        upload(args) if args[:upload]
       end
     end
 
     private
 
+    def upload(args)
+      url = Uploader.new('d2321b02db7ba15').upload(args[:output])
+      puts "Finished. GIF uploaded to Imgur at #{url}"
+    end
+
+    def convert_video(args)
+      video = Downloader.new.get_video(args[:url])
+      clip = video.trim(args[:trim_from], args[:duration])
+      clip.to_frames(frames: args[:frames])
+    end
+
+    def load_dependencies
+      require 'wgif/downloader'
+      require 'wgif/gif_maker'
+      require 'wgif/uploader'
+    end
+
     def rescue_errors
-      begin
-        yield
+      yield
       rescue WGif::InvalidUrlException
-        print_error "That looks like an invalid URL. Check the syntax."
+        print_error 'That looks like an invalid URL. Check the syntax.'
       rescue WGif::InvalidTimestampException
-        print_error "That looks like an invalid timestamp. Check the syntax."
+        print_error 'That looks like an invalid timestamp. Check the syntax.'
       rescue WGif::MissingOutputFileException
         print_error 'Please specify an output file.'
       rescue WGif::VideoNotFoundException
         print_error "WGif can't find a valid YouTube video at that URL."
       rescue WGif::ClipEncodingException
-        print_error "WGif encountered an error transcoding the video."
+        print_error 'WGif encountered an error transcoding the video.'
       rescue WGif::ImgurException => e
         print_error <<-error
 WGif couldn't upload your GIF to Imgur. The Imgur error was:
 
 #{e}
 error
-      rescue SystemExit => e
-        raise e
-      rescue Exception => e
+      rescue StandardError => e
         print_error <<-error
 Something went wrong creating your GIF. The details:
 
@@ -117,7 +68,6 @@ Something went wrong creating your GIF. The details:
 
 Please open an issue at: https://github.com/ecmendenhall/wgif/issues/new
 error
-      end
     end
 
     def print_error(message)
@@ -127,8 +77,8 @@ error
     end
 
     def print_help
-      puts "Usage: wgif [YouTube URL] [output file] [options]", "\n"
-      puts @parser.summarize, "\n"
+      puts 'Usage: wgif [YouTube URL] [output file] [options]', "\n"
+      puts @argument_parser.argument_summary, "\n"
       puts <<-example
 Example:
 
@@ -136,6 +86,5 @@ Example:
 
       example
     end
-
   end
 end
