@@ -68,7 +68,7 @@ describe WGif::Installer do
     it 'has a list of its dependencies' do
       expect(installer.class::DEPENDENCIES)
         .to eq([['ffmpeg', 'ffmpeg'],
-               ['imagemagick', 'convert']])
+                ['imagemagick', 'convert']])
     end
 
     it 'checks if a dependency exists' do
