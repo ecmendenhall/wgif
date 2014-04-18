@@ -4,7 +4,8 @@ install:
   - sudo apt-get install ffmpeg
   - sudo apt-get install imagemagick
   - bundle install
-command: CODECLIMATE_REPO_TOKEN=8849fed07a5273771df2257c579724d8eef91699fa482cf212afd1d2607a85fa bundle exec rake
+env: 'CODECLIMATE_REPO_TOKEN=8849fed07a5273771df2257c579724d8eef91699fa482cf212afd1d2607a85fa'
+command: bundle exec rake
 rvm:
   - 2.1.0
   - 2.0.0
