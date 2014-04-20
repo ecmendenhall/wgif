@@ -37,8 +37,13 @@ module WGif
         }
         opts.on('-u',
                 '--upload',
-                'Upload finished GIF to Imgur') {
+                'Upload finished gif to Imgur') {
           |u| @options[:upload] = u
+        }
+        opts.on('-p',
+                '--preview',
+                'Preview finished gif with Quick Look') {
+          |p| @options[:preview] = p
         }
         opts.on_tail('-h',
                      '--help',
@@ -73,6 +78,17 @@ module WGif
       fail WGif::InvalidUrlException unless args[:url] =~ URL
       fail WGif::InvalidTimestampException unless args[:trim_from] =~ TIMESTAMP
       fail WGif::MissingOutputFileException unless args[:output]
+    end
+
+    def print_help
+      puts 'Usage: wgif [YouTube URL] [output file] [options]', "\n"
+      puts argument_summary, "\n"
+      puts <<-example
+Example:
+
+    $ wgif https://www.youtube.com/watch?v=1A78yTvIY1k bjork.gif -s 00:03:30 -d 2 -w 400
+
+      example
     end
   end
 end

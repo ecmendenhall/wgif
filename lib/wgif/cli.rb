@@ -18,11 +18,16 @@ module WGif
         args = @argument_parser.parse(cli_args)
         frames = convert_video(args)
         GifMaker.new.make_gif(frames, args[:output], args[:dimensions])
-        upload(args) if args[:upload]
+        upload(args)  if args[:upload]
+        preview(args) if args[:preview]
       end
     end
 
     private
+
+    def preview(args)
+      Kernel.system "qlmanage -p #{args[:output]} &>/dev/null"
+    end
 
     def upload(args)
       url = Uploader.new('d2321b02db7ba15').upload(args[:output])
@@ -72,19 +77,9 @@ error
 
     def print_error(message)
       puts message, "\n"
-      print_help
+      @argument_parser.print_help
       exit 1
     end
 
-    def print_help
-      puts 'Usage: wgif [YouTube URL] [output file] [options]', "\n"
-      puts @argument_parser.argument_summary, "\n"
-      puts <<-example
-Example:
-
-    $ wgif https://www.youtube.com/watch?v=1A78yTvIY1k bjork.gif -s 00:03:30 -d 2 -w 400
-
-      example
-    end
   end
 end
