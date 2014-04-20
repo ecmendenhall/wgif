@@ -37,7 +37,7 @@ $ gem build wgif.gemspec
 and
 
 ```sh
-$ gem install wgif-0.2.0.gem
+$ gem install wgif-0.3.0.gem
 ```
 
 to install the executable.
