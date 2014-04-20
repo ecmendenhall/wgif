@@ -85,7 +85,7 @@ You'll see a preview pop up in a Quick Look window like this one:
 
 ![Preview](http://i.imgur.com/cccOnpY.png)
 
-Droping frames shrunk the file to 2.2 megabytes, but it's still not small enough to post on my Sugarcubes fan-Tumblr.
+Dropping frames shrunk the file to 2.2 megabytes, but it's still not small enough to post on my Sugarcubes fan-Tumblr.
 Let's scale it down a little with the `-w` or `--width` flag:
 
 ```sh
