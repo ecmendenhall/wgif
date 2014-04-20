@@ -8,13 +8,13 @@ WGif is a command line tool for creating animated GIFs from YouTube videos.
 ```
 Usage: wgif [YouTube URL] [output file] [options]
 
-    -f, --frames N            Number of frames in the final gif. (Default 20)
-    -s, --start HH:MM:SS      Start creating gif from input video at this timestamp. (Default 00:00:00)
-    -d, --duration seconds           Number of seconds of input video to capture. (Default 1)
-    -w, --width pixels               Width of the gif in pixels. (Default 480px)
-    -u, --upload                     Upload finished gif to Imgur
-    -p, --preview                    Preview finished gif with Quick Look
-    -h, --help                       Print help information.
+    -f, --frames N          Number of frames in the final gif. (Default 20)
+    -s, --start HH:MM:SS    Start creating gif from input video at this timestamp. (Default 00:00:00)
+    -d, --duration seconds  Number of seconds of input video to capture. (Default 1)
+    -w, --width pixels      Width of the gif in pixels. (Default 480px)
+    -u, --upload            Upload finished gif to Imgur
+    -p, --preview           Preview finished gif with Quick Look
+    -h, --help              Print help information.
 
 Example:
 
@@ -83,7 +83,7 @@ $ wgif https://www.youtube.com/watch?v=1A78yTvIY1k bjork.gif --start 00:03:30 -d
 
 You'll see a preview pop up in a Quick Look window like this one:
 
-![Preview](http://i.imgur.com/MoLtBTf.png)
+![Preview](http://i.imgur.com/cccOnpY.png)
 
 Droping frames shrunk the file to 2.2 megabytes, but it's still not small enough to post on my Sugarcubes fan-Tumblr.
 Let's scale it down a little with the `-w` or `--width` flag:
@@ -105,6 +105,7 @@ And here it is:
 ### "You shouldn't let poets lie to you."
 
 ## Changes
+- v0.3.0, 2014/4/20: Add Quick Look preview with `--preview` flag.
 - v0.2.0, 2014/4/11: Add automatic upload to Imgur with `--upload` flag.
 
 ## Contributors
