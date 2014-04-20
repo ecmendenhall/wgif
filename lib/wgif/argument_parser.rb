@@ -27,12 +27,12 @@ module WGif
         }
         opts.on('-d seconds',
                 '--duration seconds',
-                'Number of seconds of input video to capture. (Default 5)') {
+                'Number of seconds of input video to capture. (Default 1)') {
           |d|  @options[:duration] = d.to_f
         }
         opts.on('-w pixels',
                 '--width pixels',
-                'Width of the gif in pixels. (Default 500px)') {
+                'Width of the gif in pixels. (Default 480px)') {
           |gs| @options[:dimensions] = gs
         }
         opts.on('-u',
@@ -86,7 +86,7 @@ module WGif
       puts <<-example
 Example:
 
-    $ wgif https://www.youtube.com/watch?v=1A78yTvIY1k bjork.gif -s 00:03:30 -d 2 -w 400
+    $ wgif https://www.youtube.com/watch?v=1A78yTvIY1k bjork.gif -s 00:03:30 -d 2 -w 400 --upload
 
       example
     end

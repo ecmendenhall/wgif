@@ -14,8 +14,6 @@ module WGif
     end
 
     def trim(start_timestamp, duration)
-      require 'pry'
-      binding.pry
       options = {
         audio_codec: 'copy',
         video_codec: 'copy',

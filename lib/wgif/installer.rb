@@ -6,7 +6,7 @@ module WGif
 
     def run
       if dependencies_installed?
-        puts 'All dependencies are installed. Go make a GIF.'
+        puts 'All dependencies are installed. Go make a gif.'
         Kernel.exit 0
       end
       if homebrew_installed?

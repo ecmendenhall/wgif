@@ -102,5 +102,15 @@ describe WGif::Installer do
       expect(@mock_stdout.string)
         .to eq("WGif can't find Homebrew. Visit http://brew.sh/ to get it.\n")
     end
+
+    it 'prints a helpful message if all dependencies are installed' do
+      expect(Kernel).to receive(:system).with('which ffmpeg > /dev/null')
+        .and_return(true)
+      expect(Kernel).to receive(:system).with('which convert > /dev/null')
+        .and_return(true)
+      expect { installer.run }.to raise_error(SystemExit)
+      expect(@mock_stdout.string)
+        .to eq("All dependencies are installed. Go make a gif.\n")
+    end
   end
 end

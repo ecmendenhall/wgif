@@ -141,4 +141,13 @@ describe WGif::ArgumentParser do
     expect { parser.parse(['http://lol.wut']) }
       .to raise_error(WGif::MissingOutputFileException)
   end
+
+  it 'returns parsed arguments' do
+    args = parser.parse(['http://lol.wut', 'out.gif'])
+    expect(args).to eq({dimensions: '480',
+                        duration: 1.0,
+                        output: 'out.gif',
+                        trim_from: '00:00:00',
+                        url: 'http://lol.wut'})
+  end
 end

@@ -10,9 +10,11 @@ Usage: wgif [YouTube URL] [output file] [options]
 
     -f, --frames N            Number of frames in the final gif. (Default 20)
     -s, --start HH:MM:SS      Start creating gif from input video at this timestamp. (Default 00:00:00)
-    -d, --duration seconds    Number of seconds of input video to capture. (Default 1)
-    -u, --upload              Upload finished GIF to Imgur
-    -w, --width pixels        Width of the gif in pixels. (Default 480px)
+    -d, --duration seconds           Number of seconds of input video to capture. (Default 1)
+    -w, --width pixels               Width of the gif in pixels. (Default 480px)
+    -u, --upload                     Upload finished gif to Imgur
+    -p, --preview                    Preview finished gif with Quick Look
+    -h, --help                       Print help information.
 
 Example:
 
@@ -73,8 +75,18 @@ total number of frames in the finished GIF. This defaults to 20, so let's drop a
 $ wgif https://www.youtube.com/watch?v=1A78yTvIY1k bjork.gif --start 00:03:30 -d 2 -f 18
 ```
 
-Down to 2.2 megabytes, but still not small enough to post on my Sugarcubes fan-Tumblr. Let's scale it down a little
-with the `-w` or `--width` flag:
+To preview the output in a Quick Look window, add the `--preview` flag:
+
+```sh
+$ wgif https://www.youtube.com/watch?v=1A78yTvIY1k bjork.gif --start 00:03:30 -d 2 -f 18 --preview
+```
+
+You'll see a preview pop up in a Quick Look window like this one:
+
+![Preview](http://i.imgur.com/MoLtBTf.png)
+
+Droping frames shrunk the file to 2.2 megabytes, but it's still not small enough to post on my Sugarcubes fan-Tumblr.
+Let's scale it down a little with the `-w` or `--width` flag:
 
 ```sh
 $ wgif https://www.youtube.com/watch?v=1A78yTvIY1k bjork.gif --start 00:03:30 -d 2 -f 18 --width 350
