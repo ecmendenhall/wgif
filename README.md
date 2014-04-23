@@ -22,7 +22,15 @@ Example:
 ```
 
 ## Installation (Mac OS X)
-To install from Rubygems:
+** Update 2014/04/23: ** One of WGif's dependencies requires ImageMagick to compile. Before installing, make sure you:
+
+```sh
+$ brew install imagemagick
+```
+
+using [Homebrew](http://brew.sh/), or install it with your favorite package manager.
+
+Then, to install from Rubygems:
 
 ```sh
 $ gem install wgif
