@@ -22,7 +22,7 @@ Example:
 ```
 
 ## Installation (Mac OS X)
-** Update 2014/04/23: ** One of WGif's dependencies requires ImageMagick to compile. Before installing, make sure you:
+**Update 2014/04/23:** One of WGif's dependencies requires ImageMagick to compile. Before installing, make sure you:
 
 ```sh
 $ brew install imagemagick
