@@ -14,11 +14,12 @@ Usage: wgif [YouTube URL] [output file] [options]
     -w, --width pixels      Width of the gif in pixels. (Default 480px)
     -u, --upload            Upload finished gif to Imgur
     -p, --preview           Preview finished gif with Quick Look
+    -o, --output            Prints out gif info after conversion (currently just file size)
     -h, --help              Print help information.
 
 Example:
 
-    $ wgif https://www.youtube.com/watch?v=1A78yTvIY1k bjork.gif -s 00:03:30 -d 2 -w 400 --upload
+    $ wgif https://www.youtube.com/watch?v=1A78yTvIY1k bjork.gif -s 00:03:30 -d 2 -w 400 -o --upload
 ```
 
 ## Installation (Mac OS X)

@@ -35,6 +35,11 @@ module WGif
                 'Width of the gif in pixels. (Default 480px)') {
           |gs| @options[:dimensions] = gs
         }
+        opts.on('-o',
+                '--output',
+                'Displays informaiton(file size) of output') {
+          |o| @options[:display] = o
+        }
         opts.on('-u',
                 '--upload',
                 'Upload finished gif to Imgur') {

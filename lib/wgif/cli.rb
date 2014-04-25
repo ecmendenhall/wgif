@@ -20,10 +20,15 @@ module WGif
         GifMaker.new.make_gif(frames, args[:output], args[:dimensions])
         upload(args)  if args[:upload]
         preview(args) if args[:preview]
+        display_stats(args) if args[:display]
       end
     end
 
     private
+    
+    def display_stats(args)
+      StatDisplayer.new.display(args[:output])
+    end
 
     def preview(args)
       Kernel.system "qlmanage -p #{args[:output]} &>/dev/null"
