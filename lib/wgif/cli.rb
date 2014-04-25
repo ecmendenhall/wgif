@@ -27,7 +27,7 @@ module WGif
     private
     
     def display_stats(args)
-      StatDisplayer.new.display(args[:output])
+      StatDisplayer.new.display(args[:display])
     end
 
     def preview(args)
