@@ -46,7 +46,7 @@ describe WGif::Video do
   end
 
   it 'returns a specific number of frames' do
-    frames = '/tmp/wgif/frames/%2d.png'
+    frames = '/tmp/wgif/frames/%5d.png'
     options = '-vf fps=5'
     expect(clip).to receive(:transcode).with(frames, options)
     FileUtils.stub(:rm)

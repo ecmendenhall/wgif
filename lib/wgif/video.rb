@@ -30,7 +30,7 @@ module WGif
       else
         framerate = 24
       end
-      transcode(@clip, "/tmp/wgif/frames/\%2d.png", "-vf fps=#{framerate}")
+      transcode(@clip, "/tmp/wgif/frames/\%5d.png", "-vf fps=#{framerate}")
       open_frame_dir
     end
 
