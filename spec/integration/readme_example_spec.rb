@@ -4,7 +4,7 @@ require 'wgif/cli'
 describe 'README example', integration: true do
   it 'creates the same GIF as the README' do
     args =  ['https://www.youtube.com/watch?v=1A78yTvIY1k',
-             '/tmp/bjork.gif',
+             'bjork.gif',
              '--start',
              '00:03:30',
              '-d',
@@ -15,7 +15,7 @@ describe 'README example', integration: true do
              '350']
     WGif::CLI.new.make_gif(args)
     expected_sha = 'ff739544dd26b983c122bb78858481d87c7ffeff'
-    gif_sha = Digest::SHA1.file('/tmp/bjork.gif').hexdigest
+    gif_sha = Digest::SHA1.file('bjork.gif').hexdigest
     expect(gif_sha).to eq(expected_sha)
   end
 end
