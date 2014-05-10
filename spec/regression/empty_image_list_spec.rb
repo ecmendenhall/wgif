@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'wgif/cli'
 
-describe 'empty image list bug', integration: true do
+describe 'empty image list bug', regression: true do
   it 'throws an empty image list error' do
     args =  ['https://www.youtube.com/watch?v=deFDlB8RiNg',
              'fish_grease.gif',
