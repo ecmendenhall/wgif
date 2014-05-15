@@ -1,7 +1,7 @@
 require 'spec_helper'
-require 'wgif/stat_displayer'
+require 'wgif/info_displayer'
 
-describe WGif::StatDisplayer do
+describe WGif::InfoDisplayer do
 
   let(:cache) { described_class.new }
 

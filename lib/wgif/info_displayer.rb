@@ -1,5 +1,5 @@
 module WGif
-  class StatDisplayer
+  class InfoDisplayer
 
     GIGA_SIZE = 1073741824.0
     MEGA_SIZE = 1048576.0
