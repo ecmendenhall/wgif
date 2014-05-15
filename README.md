@@ -19,7 +19,7 @@ Usage: wgif [YouTube URL] [output file] [options]
 
 Example:
 
-    $ wgif https://www.youtube.com/watch?v=1A78yTvIY1k bjork.gif -s 00:03:30 -d 2 -w 400 -o --upload
+    $ wgif https://www.youtube.com/watch?v=1A78yTvIY1k bjork.gif -s 00:03:30 -d 2 -w 400 -i --upload
 ```
 
 ## Installation (Mac OS X)
