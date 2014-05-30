@@ -4,12 +4,12 @@ module WGif
     GIGA_SIZE = 1073741824.0
     MEGA_SIZE = 1048576.0
     KILO_SIZE = 1024.0
-  
+
     def display(file_name)
       file_size = readable_file_size(File.size("#{file_name}").to_f)
-      puts "#{file_name} is #{file_size}" 
+      puts "#{file_name} is #{file_size}"
     end
-  
+
     def readable_file_size(size)
 
       if size < KILO_SIZE
@@ -21,8 +21,8 @@ module WGif
       else
         abb, div = "GB", GIGA_SIZE
       end
-    
+
       "%.3f #{abb}" % (size / div)
-    end 
+    end
   end
 end

@@ -25,8 +25,8 @@ module WGif
     end
 
     private
-    
-    def display_stats(args)
+
+    def display_info(args)
       InfoDisplayer.new.display(args[:output])
     end
 
@@ -47,7 +47,7 @@ module WGif
 
     def load_dependencies
       require 'wgif/downloader'
-      require 'wgif/info_displayer'      
+      require 'wgif/info_displayer'
       require 'wgif/gif_maker'
       require 'wgif/uploader'
     end

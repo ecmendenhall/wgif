@@ -42,7 +42,7 @@ module WGif
         }
         opts.on('-i',
                 '--info',
-                'Displays info about finished gif') {
+                'Displays info about finished gif (currently just file size)') {
           |i| @options[:info] = i
         }
         opts.on('-p',
