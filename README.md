@@ -114,6 +114,7 @@ And here it is:
 ### "You shouldn't let poets lie to you."
 
 ## Changes
+- v0.4.0, 2014/5/30: Show file size with `--info` flag. (Thanks, [justalisteningman](https://github.com/justalisteningman)!)
 - v0.3.1, 2014/5/10: Fixes frame order for gifs with more than 100 frames. ([Issue #14](https://github.com/ecmendenhall/wgif/issues/14))
 - v0.3.0, 2014/4/20: Add Quick Look preview with `--preview` flag.
 - v0.2.0, 2014/4/11: Add automatic upload to Imgur with `--upload` flag.
