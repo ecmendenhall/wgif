@@ -79,6 +79,16 @@ describe WGif::ArgumentParser do
     expect(options[:preview]).to eq(true)
   end
 
+  it 'parses the short output option' do
+    options = parser.parse_options ['-i']
+    expect(options[:info]).to eq(true)
+  end
+  
+  it 'parses the long output option' do
+    options = parser.parse_options ['--info']
+    expect(options[:info]).to eq(true)
+  end
+
   it 'handles args in wacky order' do
     args = parser.parse_args([
       '-d',

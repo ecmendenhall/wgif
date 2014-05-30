@@ -18,12 +18,17 @@ module WGif
         args = @argument_parser.parse(cli_args)
         frames = convert_video(args)
         GifMaker.new.make_gif(frames, args[:output], args[:dimensions])
+        display_info(args) if args[:info]
         upload(args)  if args[:upload]
         preview(args) if args[:preview]
       end
     end
 
     private
+    
+    def display_stats(args)
+      InfoDisplayer.new.display(args[:output])
+    end
 
     def preview(args)
       Kernel.system "qlmanage -p #{args[:output]} &>/dev/null"
@@ -42,6 +47,7 @@ module WGif
 
     def load_dependencies
       require 'wgif/downloader'
+      require 'wgif/info_displayer'      
       require 'wgif/gif_maker'
       require 'wgif/uploader'
     end

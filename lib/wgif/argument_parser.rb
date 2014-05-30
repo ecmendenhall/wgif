@@ -40,6 +40,11 @@ module WGif
                 'Upload finished gif to Imgur') {
           |u| @options[:upload] = u
         }
+        opts.on('-i',
+                '--info',
+                'Displays info about finished gif') {
+          |i| @options[:info] = i
+        }
         opts.on('-p',
                 '--preview',
                 'Preview finished gif with Quick Look') {
