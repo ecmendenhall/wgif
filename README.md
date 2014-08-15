@@ -8,14 +8,14 @@ WGif is a command line tool for creating animated GIFs from YouTube videos.
 ```
 Usage: wgif [YouTube URL] [output file] [options]
 
-    -f, --frames N          Number of frames in the final gif. (Default 20)
-    -s, --start HH:MM:SS    Start creating gif from input video at this timestamp. (Default 00:00:00)
-    -d, --duration seconds  Number of seconds of input video to capture. (Default 1)
-    -w, --width pixels      Width of the gif in pixels. (Default 480px)
-    -u, --upload            Upload finished gif to Imgur
-    -p, --preview           Preview finished gif with Quick Look
-  	-i, --info				      Displays info about finished gif (currently just file size)
-    -h, --help              Print help information.
+    -f, --frames N             Number of frames in the final gif. (Default 20)
+    -s, --start HH:MM:SS.SSSS  Start creating gif from input video at this timestamp. (Default 00:00:00)
+    -d, --duration seconds     Number of seconds of input video to capture. (Default 1)
+    -w, --width pixels         Width of the gif in pixels. (Default 480px)
+    -u, --upload               Upload finished gif to Imgur
+    -p, --preview              Preview finished gif with Quick Look
+  	-i, --info				         Displays info about finished gif (currently just file size)
+    -h, --help                 Print help information.
 
 Example:
 
@@ -114,6 +114,7 @@ And here it is:
 ### "You shouldn't let poets lie to you."
 
 ## Changes
+- v0.5.0, 2014/8/15: Add support for sub-second timestamps in `--start` and `--duration` flags.
 - v0.4.0, 2014/5/30: Show file size with `--info` flag. (Thanks, [justalisteningman](https://github.com/justalisteningman)!)
 - v0.3.1, 2014/5/10: Fixes frame order for gifs with more than 100 frames. ([Issue #14](https://github.com/ecmendenhall/wgif/issues/14))
 - v0.3.0, 2014/4/20: Add Quick Look preview with `--preview` flag.
