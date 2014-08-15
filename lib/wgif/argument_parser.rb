@@ -20,14 +20,14 @@ module WGif
                 'Number of frames in the final gif. (Default 20)') {
           |n|  @options[:frames] = n.to_i
         }
-        opts.on('-s HH:MM:SS',
-                '--start HH:MM:SS',
+        opts.on('-s HH:MM:SS.SSSS',
+                '--start HH:MM:SS.SSSS',
                 'Start creating gif from input video at this timestamp. (Default 00:00:00)') {
           |ts| @options[:trim_from] = ts
         }
         opts.on('-d seconds',
                 '--duration seconds',
-                'Number of seconds of input video to capture. (Default 1)') {
+                'Number of seconds of input video to capture. (Default 1.0)') {
           |d|  @options[:duration] = d.to_f
         }
         opts.on('-w pixels',
@@ -91,7 +91,7 @@ module WGif
       puts <<-example
 Example:
 
-    $ wgif https://www.youtube.com/watch?v=1A78yTvIY1k bjork.gif -s 00:03:30 -d 2 -w 400 --upload
+    $ wgif https://www.youtube.com/watch?v=1A78yTvIY1k bjork.gif -s 00:03:30 -d 2.2 -w 400 --upload
 
       example
     end
