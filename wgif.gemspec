@@ -18,16 +18,16 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(/^(test|spec|features)\//)
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'rmagick'
-  spec.add_dependency 'ruby-progressbar'
-  spec.add_dependency 'streamio-ffmpeg'
+  spec.add_dependency 'rmagick', '2.13.3'
+  spec.add_dependency 'ruby-progressbar', '1.5.1'
+  spec.add_dependency 'streamio-ffmpeg', '1.0.0'
   spec.add_dependency 'typhoeus', '~> 0.6'
-  spec.add_dependency 'viddl-rb'
+  spec.add_dependency 'viddl-rb', '1.0.3'
 
   spec.add_development_dependency 'bundler', '~> 1.3'
-  spec.add_development_dependency 'codeclimate-test-reporter'
-  spec.add_development_dependency 'pry-nav'
-  spec.add_development_dependency 'rake'
+  spec.add_development_dependency 'codeclimate-test-reporter', '~> 0.3'
+  spec.add_development_dependency 'pry-nav', '~> 0.2'
+  spec.add_development_dependency 'rake', '~> 10.3'
   spec.add_development_dependency 'rspec', '~> 2.14'
-  spec.add_development_dependency 'simplecov'
+  spec.add_development_dependency 'simplecov', '~> 0.8'
 end
