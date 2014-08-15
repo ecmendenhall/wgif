@@ -114,7 +114,7 @@ And here it is:
 ### "You shouldn't let poets lie to you."
 
 ## Changes
-- v0.5.0, 2014/8/15: Add support for sub-second times in `--start` and `--duration` flags.
+- v0.5.0, 2014/8/15: Add support for sub-second timestamps in `--start` and `--duration` flags ([Issue #13](https://github.com/ecmendenhall/wgif/issues/13)).
 - v0.4.0, 2014/5/30: Show file size with `--info` flag. (Thanks, [justalisteningman](https://github.com/justalisteningman)!)
 - v0.3.1, 2014/5/10: Fixes frame order for gifs with more than 100 frames. ([Issue #14](https://github.com/ecmendenhall/wgif/issues/14))
 - v0.3.0, 2014/4/20: Add Quick Look preview with `--preview` flag.
