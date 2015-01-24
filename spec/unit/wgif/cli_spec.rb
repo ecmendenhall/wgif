@@ -26,7 +26,7 @@ describe WGif::CLI do
     end
 
     it 'catches invalid URLs' do
-      WGif::ArgumentParser.any_instance.stub(:parse)
+      allow_any_instance_of(WGif::ArgumentParser).to receive(:parse)
         .and_raise(WGif::InvalidUrlException)
       expect { cli.make_gif([]) }.to raise_error(SystemExit)
       message = 'That looks like an invalid URL. Check the syntax.'
@@ -34,7 +34,7 @@ describe WGif::CLI do
     end
 
     it 'catches invalid timestamps' do
-      WGif::ArgumentParser.any_instance.stub(:parse)
+      allow_any_instance_of(WGif::ArgumentParser).to receive(:parse)
         .and_raise(WGif::InvalidTimestampException)
       expect { cli.make_gif([]) }.to raise_error(SystemExit)
       message = 'That looks like an invalid timestamp. Check the syntax.'
@@ -42,7 +42,7 @@ describe WGif::CLI do
     end
 
     it 'catches missing output args' do
-      WGif::ArgumentParser.any_instance.stub(:parse)
+      allow_any_instance_of(WGif::ArgumentParser).to receive(:parse)
         .and_raise(WGif::MissingOutputFileException)
       expect { cli.make_gif([]) }.to raise_error(SystemExit)
       message = 'Please specify an output file.'
@@ -50,7 +50,7 @@ describe WGif::CLI do
     end
 
     it 'catches missing videos' do
-      WGif::ArgumentParser.any_instance.stub(:parse)
+      allow_any_instance_of(WGif::ArgumentParser).to receive(:parse)
         .and_raise(WGif::VideoNotFoundException)
       expect { cli.make_gif([]) }.to raise_error(SystemExit)
       message = "WGif can't find a valid YouTube video at that URL."
@@ -58,7 +58,7 @@ describe WGif::CLI do
     end
 
     it 'catches encoding exceptions' do
-      WGif::ArgumentParser.any_instance.stub(:parse)
+      allow_any_instance_of(WGif::ArgumentParser).to receive(:parse)
         .and_raise(WGif::ClipEncodingException)
       expect { cli.make_gif([]) }.to raise_error(SystemExit)
       message = 'WGif encountered an error transcoding the video.'
@@ -66,20 +66,21 @@ describe WGif::CLI do
     end
 
     it 'catches upload errors' do
-      WGif::ArgumentParser.any_instance.stub(:parse)
+      allow_any_instance_of(WGif::ArgumentParser).to receive(:parse)
         .and_raise(WGif::ImgurException, 'Imgur error')
       expect { cli.make_gif([]) }.to raise_error(SystemExit)
       expect_help_with_message(@mock_stdout.string, 'Imgur error')
     end
 
     it 'raises SystemExit when thrown' do
-      WGif::ArgumentParser.any_instance.stub(:parse).and_raise(SystemExit)
+      allow_any_instance_of(WGif::ArgumentParser).to receive(:parse)
       expect { cli.make_gif([]) }.to raise_error(SystemExit)
     end
 
     it 'Prints the backtrace for all other exceptions' do
       exception = StandardError.new 'crazy error'
-      WGif::ArgumentParser.any_instance.stub(:parse).and_raise(exception)
+      allow_any_instance_of(WGif::ArgumentParser).to receive(:parse)
+        .and_raise(exception)
       expect { cli.make_gif([]) }.to raise_error(SystemExit)
       message = 'Something went wrong creating your GIF. The details:'
       expect_help_with_message(@mock_stdout.string, message)

@@ -1,19 +1,17 @@
 require 'optparse'
-require 'wgif/exceptions'
+require 'wgif/validator'
 
 module WGif
   class ArgumentParser
 
-    URL = %r{\Ahttps?://.*\z}
-    TIMESTAMP = /\A\d{1,2}(?::\d{2})+(?:\.\d*)?\z/
+    DEFAULTS = {
+      trim_from: '00:00:00',
+      duration: 1.0,
+      dimensions: '480'
+    }
 
     def initialize
       @options = {}
-      @defaults = {
-        trim_from: '00:00:00',
-        duration: 1.0,
-        dimensions: '480'
-      }
       @parser = OptionParser.new do |opts|
         opts.on('-f N',
                 '--frames N',
@@ -61,8 +59,12 @@ module WGif
 
     def parse(args)
       options = parse_args(args)
-      validate_args(options)
+      validate(options)
       options
+    end
+
+    def validate(args)
+      WGif::Validator.new(args).validate
     end
 
     def argument_summary
@@ -70,19 +72,13 @@ module WGif
     end
 
     def parse_args(args)
-      options = @defaults.merge(parse_options args)
+      options = DEFAULTS.merge(parse_options args)
       options.merge(url: args[0], output: args[1])
     end
 
     def parse_options(args)
       @parser.parse! args
       @options
-    end
-
-    def validate_args(args)
-      fail WGif::InvalidUrlException unless args[:url] =~ URL
-      fail WGif::InvalidTimestampException unless args[:trim_from] =~ TIMESTAMP
-      fail WGif::MissingOutputFileException unless args[:output]
     end
 
     def print_help

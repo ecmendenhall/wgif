@@ -9,7 +9,7 @@ describe WGif::DownloadBar do
     let(:mock_progress_bar) { double(ProgressBar) }
 
     before do
-      ProgressBar.stub(:create).and_return(mock_progress_bar)
+      allow(ProgressBar).to receive(:create).and_return(mock_progress_bar)
     end
 
     it 'creates a ProgressBar with the correct format, smoothing, and size' do

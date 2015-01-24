@@ -8,13 +8,13 @@ describe WGif::GifMaker do
   let(:images) { double(Magick::ImageList, each: nil) }
 
   before do
-    Magick::ImageList.stub(:new).and_return(images)
+    allow(Magick::ImageList).to receive(:new).and_return(images)
   end
 
   it 'converts a directory of frames to a gif' do
-    images.should_receive(:coalesce)
-    images.should_receive(:optimize_layers)
-    images.should_receive(:write).with('bjork.gif')
+    expect(images).to receive(:coalesce)
+    expect(images).to receive(:optimize_layers)
+    expect(images).to receive(:write).with('bjork.gif')
     gif_maker.make_gif([], 'bjork.gif', '500')
   end
 

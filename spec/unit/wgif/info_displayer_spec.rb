@@ -16,7 +16,7 @@ describe WGif::InfoDisplayer do
 
   it 'prints out a file size to the command line' do
     file_name = "fake_file_name.rb"
-    File.stub(:size).with(file_name).and_return("1048576")
+    allow(File).to receive(:size).with(file_name).and_return('1048576')
     cache.display(file_name)
     expect(@mock_stdout.string).to match(/1.000 MB/)
   end

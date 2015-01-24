@@ -27,7 +27,7 @@ describe WGif::Uploader do
   end
 
   it 'sends an authorized POST request to Imgur with image file data' do
-    File.stub(:open).and_yield(tempfile)
+    allow(File).to receive(:open).and_yield(tempfile)
     expect(Typhoeus).to receive(:post)
       .with('https://api.imgur.com/3/image', request_params).and_return(success)
     uploader.upload(tempfile.path)
@@ -40,7 +40,7 @@ describe WGif::Uploader do
   end
 
   it 'returns the url when successful' do
-    File.stub(:open).and_yield(tempfile)
+    allow(File).to receive(:open).and_yield(tempfile)
     expect(Typhoeus).to receive(:post)
       .with('https://api.imgur.com/3/image', request_params).and_return(success)
     expect(uploader.upload(tempfile.path)).to eq('foo')

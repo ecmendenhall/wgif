@@ -17,7 +17,7 @@ module WGif
       options = {
         audio_codec: 'copy',
         video_codec: 'copy',
-        custom: "-ss #{start_timestamp} -t 00:00:#{'%06.3f' % duration}"
+        custom: "-ss #{start_timestamp} -t 00:00:#{format('%06.3f', duration)}"
       }
       transcode(@clip, "/tmp/wgif/#{@name}-clip.mov", options)
       WGif::Video.new "#{@name}-clip", "/tmp/wgif/#{@name}-clip.mov"

@@ -13,7 +13,7 @@ describe 'frame order bug', regression: true do
              '170']
     WGif::CLI.new.make_gif(args)
     frames = Dir.entries('/tmp/wgif/frames')
-    filenames = (1..170).map {|n| sprintf "%05d.png", n }
-    expect(frames).to eq([".", ".."] + filenames)
+    filenames = (1..170).map { |n| sprintf '%05d.png', n }
+    expect(frames).to eq(['.', '..'] + filenames)
   end
 end
