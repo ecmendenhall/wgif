@@ -42,7 +42,7 @@ module WGif
     end
 
     def open_frame_dir
-      Dir.glob('/tmp/wgif/frames/*.png')
+      Dir.glob('/tmp/wgif/frames/*.png').sort
     end
 
     def transcode(clip, file, options)

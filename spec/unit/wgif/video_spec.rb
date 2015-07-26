@@ -51,7 +51,8 @@ describe WGif::Video do
     expect(clip).to receive(:transcode).with(frames, options)
     allow(FileUtils).to receive(:rm)
     expect(clip).to receive(:duration).and_return 2
-    expect(Dir).to receive(:glob).with('/tmp/wgif/frames/*.png').twice
+    expect(Dir).to receive(:glob).with('/tmp/wgif/frames/*.png')
+      .twice.and_return([])
     video = described_class.new 'bjork', '/tmp/wgif/bjork.mp4'
     video.to_frames(frames: 10)
   end
@@ -77,5 +78,17 @@ describe WGif::Video do
     video = described_class.new 'bjork', '/tmp/wgif/bjork.mp4'
     expect { video.trim('00:00:00', 5.0) }
       .to raise_error(WGif::ClipEncodingException)
+  end
+
+  it 'sorts frames in lexicographic order' do
+    frames = '/tmp/wgif/frames/%5d.png'
+    options = '-vf fps=24'
+    expect(clip).to receive(:transcode).with(frames, options)
+    allow(FileUtils).to receive(:rm)
+    unsorted_files = ['001.png', '003.png', '002.png']
+    expect(Dir).to receive(:glob).with('/tmp/wgif/frames/*.png')
+      .twice.and_return(unsorted_files)
+    video = described_class.new 'bjork', '/tmp/wgif/bjork.mp4'
+    expect(video.to_frames).to eq(['001.png', '002.png', '003.png'])
   end
 end

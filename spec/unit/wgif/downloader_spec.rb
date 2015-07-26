@@ -23,7 +23,10 @@ describe WGif::Downloader do
 
   it 'throws an error if the video is not found' do
     expect(ViddlRb).to receive(:get_urls).with(clip_url)
-      .and_return(['http://lol.wut'])
+      .and_return(['not a url'])
+    fake_response = double(response_code: 404)
+    fake_request = double(run: fake_response).as_null_object
+    allow(Typhoeus::Request).to receive(:new).and_return(fake_request)
     expect { downloader.get_video(clip_url) }
       .to raise_error(WGif::VideoNotFoundException)
   end
