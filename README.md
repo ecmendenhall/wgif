@@ -126,6 +126,7 @@ And here it is:
 ## Contributors
 Thanks to [arlandism](https://github.com/arlandism) and [ellie007](https://github.com/ellie007) for pairing on Imgur uploads.
 Thanks to [justalisteningman](https://github.com/justalisteningman) for adding file size info.
+Thanks to [aparrish](https://github.com/aparrish) for diagnosing an Ubuntu frame ordering bug.
 
 ## Contributions
 Are welcome via pull request.
