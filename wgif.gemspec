@@ -18,11 +18,11 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(/^(test|spec|features)\//)
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'rmagick', '2.13.3'
+  spec.add_dependency 'rmagick', '2.15.3'
   spec.add_dependency 'ruby-progressbar', '1.5.1'
   spec.add_dependency 'streamio-ffmpeg', '1.0.0'
   spec.add_dependency 'typhoeus', '~> 0.6'
-  spec.add_dependency 'viddl-rb', '1.1.0'
+  spec.add_dependency 'viddl-rb', '1.1.1'
 
   spec.add_development_dependency 'bundler', '~> 1.3'
   spec.add_development_dependency 'codeclimate-test-reporter', '~> 0.3'

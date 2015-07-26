@@ -114,7 +114,8 @@ And here it is:
 ### "You shouldn't let poets lie to you."
 
 ## Changes
-- v0.5.3, 2015/7/26: Fix sort order of globbed frames. ([Issue #19](https://github.com/ecmendenhall/wgif/issues/19)
+- v0.5.4, 2015/7/26: Add `--version` flag. Upgrade viddl-rb and rmagick.
+- v0.5.3, 2015/7/26: Fix sort order of globbed frames. ([Issue #19](https://github.com/ecmendenhall/wgif/issues/19))
 - v0.5.2, 2015/1/24: Use `/usr/bin/env ruby` in binary.
 - v0.5.1, 2014/8/15: Lock down dependency versions.
 - v0.5.0, 2014/8/15: Add support for sub-second timestamps in `--start` and `--duration` flags ([Issue #13](https://github.com/ecmendenhall/wgif/issues/13)).

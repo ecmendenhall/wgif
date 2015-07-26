@@ -1,6 +1,7 @@
 require 'wgif/argument_parser'
 require 'wgif/exceptions'
 require 'wgif/installer'
+require 'wgif/version'
 
 module WGif
   class CLI

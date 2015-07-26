@@ -54,6 +54,12 @@ module WGif
           print_help
           exit
         }
+        opts.on_tail('-v',
+                     '--version',
+                     'Print version.') {
+          print_version
+          exit
+        }
       end
     end
 
@@ -79,6 +85,10 @@ module WGif
     def parse_options(args)
       @parser.parse! args
       @options
+    end
+
+    def print_version
+      puts "wgif #{WGif::VERSION}"
     end
 
     def print_help

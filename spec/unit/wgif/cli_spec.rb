@@ -95,5 +95,10 @@ describe WGif::CLI do
         expect(@mock_stdout.string).to include(help_info)
       end
     end
+
+    it 'prints version information' do
+      expect { cli.make_gif(['-v']) }.to raise_error(SystemExit)
+      expect(@mock_stdout.string).to include(WGif::VERSION)
+    end
   end
 end
