@@ -20,7 +20,7 @@ Usage: wgif [YouTube URL] [output file] [options]
     -w, --width pixels      Width of the gif in pixels. (Default 480px)
     -u, --upload            Upload finished gif to Imgur
     -p, --preview           Preview finished gif with Quick Look
-  	-i, --info				      Displays info about finished gif (currently just file size)
+  	-i, --info				Displays info about finished gif (currently just file size)
     -h, --help              Print help information.
 
 Example:
