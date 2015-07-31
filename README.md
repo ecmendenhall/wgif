@@ -5,7 +5,9 @@
 WGif is a command line tool for creating animated GIFs from YouTube videos.
 
 > Other tools can make gifs, but no other tool can make high quality gifs easily like wgif can
+
 > you can use that quote on your readme
+
 — [Kevin Liddle](https://github.com/KevinLiddle), Software Craftsman
 
 ##TL;DR
