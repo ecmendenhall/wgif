@@ -1,4 +1,5 @@
 require 'wgif/cli'
+require 'wgif/converter'
 require 'wgif/download_bar'
 require 'wgif/downloader'
 require 'wgif/exceptions'
