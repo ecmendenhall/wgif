@@ -18,18 +18,18 @@ describe WGif::CLI do
     def expect_help_with_message(out, message)
       expect(out).to include(message)
       expect(out)
-        .to include('Usage: wgif [YouTube URL] [output file] [options]')
+        .to include('Usage: wgif [YouTube URL or input filepath] [output file] [options]')
       cli.argument_parser.argument_summary.each do |help_info|
         expect(out).to include(help_info)
       end
-      expect(out).to include('Example:')
+      expect(out).to include('Examples:')
     end
 
     it 'catches invalid URLs' do
       allow_any_instance_of(WGif::ArgumentParser).to receive(:parse)
         .and_raise(WGif::InvalidUrlException)
       expect { cli.make_gif([]) }.to raise_error(SystemExit)
-      message = 'That looks like an invalid URL. Check the syntax.'
+      message = 'That looks like an invalid URL. Check the syntax to make sure there are no spaces or non-ASCII characters.'
       expect_help_with_message(@mock_stdout.string, message)
     end
 

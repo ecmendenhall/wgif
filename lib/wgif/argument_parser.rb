@@ -92,12 +92,13 @@ module WGif
     end
 
     def print_help
-      puts 'Usage: wgif [YouTube URL] [output file] [options]', "\n"
+      puts 'Usage: wgif [YouTube URL or input filepath] [output file] [options]', "\n"
       puts argument_summary, "\n"
       puts <<-example
-Example:
+Examples:
 
     $ wgif https://www.youtube.com/watch?v=1A78yTvIY1k bjork.gif -s 00:03:30 -d 2.2 -w 400 --upload
+    $ wgif ~/Documents/cool-video.mov cool.gif -s 00:03:30 -d 2.2 -w 400 --upload
 
       example
     end

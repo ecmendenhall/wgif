@@ -1,4 +1,5 @@
 require 'wgif/argument_parser'
+require 'wgif/converter'
 require 'wgif/exceptions'
 require 'wgif/installer'
 require 'wgif/version'
@@ -41,9 +42,7 @@ module WGif
     end
 
     def convert_video(args)
-      video = Downloader.new.get_video(args[:url])
-      clip = video.trim(args[:trim_from], args[:duration])
-      clip.to_frames(frames: args[:frames])
+      Converter.new(args).video_to_frames
     end
 
     def load_dependencies
@@ -56,7 +55,7 @@ module WGif
     def rescue_errors
       yield
       rescue WGif::InvalidUrlException
-        print_error 'That looks like an invalid URL. Check the syntax.'
+        print_error 'That looks like an invalid URL. Check the syntax to make sure there are no spaces or non-ASCII characters.'
       rescue WGif::InvalidTimestampException
         print_error 'That looks like an invalid timestamp. Check the syntax.'
       rescue WGif::MissingOutputFileException
