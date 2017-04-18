@@ -10,7 +10,7 @@ WGif is a command line tool for creating animated GIFs from YouTube videos.
 
 — [Kevin Liddle](https://github.com/KevinLiddle), Software Craftsman
 
-##TL;DR
+## TL;DR
 ```
 Usage: wgif [YouTube URL] [output file] [options]
 
